@@ -21,6 +21,15 @@ export default function Leaderboard() {
   return (
     <div className="leaderboard-container">
       <h1 className="title">LEADERBOARD</h1>
+
+      <div className="leaderboard-table">
+        <div className="leaderboard-header">
+          {/* Table header - stays fixed at the top */}
+          <div className="leaderboard-cell">Rank</div>
+          <div className="leaderboard-cell">Name</div>
+          <div className="leaderboard-cell">Score</div>
+        </div>
+      </div>
     </div>
   );
 }
