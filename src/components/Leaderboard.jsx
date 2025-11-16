@@ -23,11 +23,25 @@ export default function Leaderboard() {
       <h1 className="title">LEADERBOARD</h1>
 
       <div className="leaderboard-table">
+        {/* Table header - stays fixed at the top */}
         <div className="leaderboard-header">
-          {/* Table header - stays fixed at the top */}
           <div className="leaderboard-cell">Rank</div>
           <div className="leaderboard-cell">Name</div>
           <div className="leaderboard-cell">Score</div>
+        </div>
+
+        {/* Table body - scrollable */}
+        {/* Container to hold all the data rows */}
+        {/* TODO: Make this scrollable with CSS */}
+        <div className="leaderboard-body">
+          {leaderboardData.map((player) => (
+            <div key={player.rank} className="leaderboard-row">
+              {/* For each player, we create a leaderboard-row with 3 cells showing rank, name, and score */}
+              <div className="leaderboard-cell">{player.rank}</div>
+              <div className="leaderboard-cell">{player.name}</div>
+              <div className="leaderboard-cell">{player.score}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
