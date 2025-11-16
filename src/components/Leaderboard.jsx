@@ -32,7 +32,6 @@ export default function Leaderboard() {
 
         {/* Table body - scrollable */}
         {/* Container to hold all the data rows */}
-        {/* TODO: Make this scrollable with CSS */}
         <div className="leaderboard-body">
           {leaderboardData.map((player) => (
             <div key={player.rank} className="leaderboard-row">
