@@ -25,6 +25,16 @@ export default function Leaderboard() {
     const storedData = localStorage.getItem("defaultLeaderboard");
 
     if (storedData) {
+      // Parse JSON and handle errors
+      try {
+        const parsedData = JSON.parse(storedData);
+
+        // TODO: add sorting and processing
+        // TODO: add rank numbers and update state
+      } catch (error) {
+        console.error("Error parsing leaderboard data: ", error);
+        setLeaderboardData([]);
+      }
     }
   }, []);
 
