@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 
 export default function Leaderboard() {
-  const [leaderboardData, setLeaderboardData] = useState([]);
-
   // Old sample data
   // ? Maybe get from this data API or codebase?
   /* const [leaderboardData] = useState([
@@ -19,6 +17,16 @@ export default function Leaderboard() {
     { rank: 11, name: "Bo Naylor", score: 195 },
     { rank: 12, name: "Jhonkensy Noel", score: 162 },
   ]); */
+
+  const [leaderboardData, setLeaderboardData] = useState([]);
+
+  useEffect(() => {
+    // Fetch leaderboard data from localStorage
+    const storedData = localStorage.getItem("defaultLeaderboard");
+
+    if (storedData) {
+    }
+  }, []);
 
   return (
     <div className="leaderboard-container">
