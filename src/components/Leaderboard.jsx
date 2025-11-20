@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 
 export default function Leaderboard() {
-  // For now this is just sample data
+  const [leaderboardData, setLeaderboardData] = useState([]);
+
+  // Old sample data
   // ? Maybe get from this data API or codebase?
-  const [leaderboardData] = useState([
+  /* const [leaderboardData] = useState([
     { rank: 1, name: "José Ramírez", score: 283 },
     { rank: 2, name: "Steven Kwan", score: 272 },
     { rank: 3, name: "Kyle Manzardo", score: 234 },
@@ -16,7 +18,7 @@ export default function Leaderboard() {
     { rank: 10, name: "Johnathan Rodríguez", score: 197 },
     { rank: 11, name: "Bo Naylor", score: 195 },
     { rank: 12, name: "Jhonkensy Noel", score: 162 },
-  ]);
+  ]); */
 
   return (
     <div className="leaderboard-container">
