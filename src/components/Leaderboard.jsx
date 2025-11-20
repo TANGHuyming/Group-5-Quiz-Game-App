@@ -29,8 +29,22 @@ export default function Leaderboard() {
       try {
         const parsedData = JSON.parse(storedData);
 
-        // TODO: add sorting and processing
-        // TODO: add rank numbers and update state
+        // Sort by score (desc), then by time taken (asc)
+        const sortedData = [...parsedData].sort((a, b) => {
+          if (b.score !== a.score) {
+            return b.score - a.score; // higher score first
+          }
+          return parseFloat(a.timeTaken) - parseFloat(b.timeTaken); //faster time first (in case of tie)
+        });
+
+        // Add rank numbers and map username to name
+        const rankedData = sortedData.map((entry, index) => ({
+          rank: index + 1,
+          name: entry.username,
+          score: entry.score,
+        }));
+
+        setLeaderboardData(rankedData);
       } catch (error) {
         console.error("Error parsing leaderboard data: ", error);
         setLeaderboardData([]);
