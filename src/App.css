@@ -36,8 +36,9 @@
     align-items: center;
     background-color: #FFCE72;
     padding: 20px;
-    margin: 20px 0;
+    margin-bottom: 20px;
     border-radius: 15px;
+    min-height: 500px;
 }
 
 .description-container {
@@ -143,13 +144,22 @@
     color: #000000;
 }
 
-.website-name,
-.title {
+.website-name {
     font-size: 3em;
     margin: 10px;
     letter-spacing: 5px;
     word-spacing: 10px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, sans-serif;
+    font-family: 'Arial Narrow Bold', sans-serif;
+    font-weight: 900;
+}
+
+.title {
+    font-size: 2.5em;
+    margin: 10px;
+    letter-spacing: 5px;
+    word-spacing: 10px;
+    font-family: 'Arial Narrow Bold', sans-serif;
+    font-weight: 900;
 }
 
 .address-container {

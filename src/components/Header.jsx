@@ -1,17 +1,28 @@
+import { NavLink } from 'react-router-dom';
+
 export default function Header() {
     return (
         <>
             <div className="header-container">
-                <div className="logo-container">
-                    <h2>LOGO</h2>
-                </div>
                 <div className="header-subcontainer">
                     <h2 className="website-name">Trivia Bonanza</h2>
                     <nav className="nav-container">
-                        <a href="">Home</a>
-                        <a href="">ScoreBoard</a>
-                        <a href="">About Us</a>
-                        <a href="">Super Secret</a>
+                        <NavLink
+                            to="/"
+                            style={({isActive}) => (isActive ? {backgroundColor: "#5c4a2aff", color: "white"}: {})}
+                        >Home</NavLink>
+                        <NavLink
+                            to="/scoreboard"
+                            style={({isActive}) => (isActive ? {backgroundColor: "#5c4a2aff", color: "white"}: {})}
+                        >ScoreBoard</NavLink>
+                        <NavLink
+                            to="/about-us"
+                            style={({isActive}) => (isActive ? {backgroundColor: "#5c4a2aff", color: "white"}: {})}
+                        >About Us</NavLink>
+                        <NavLink
+                            to="/super-secret"
+                            style={({isActive}) => (isActive ? {backgroundColor: "#5c4a2aff", color: "white"}: {})}
+                        >Super Secret</NavLink>
                     </nav>
                 </div>
             </div>

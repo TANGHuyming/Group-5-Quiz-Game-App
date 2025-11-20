@@ -1,13 +1,8 @@
+import { NavLink } from "react-router-dom";
+
 export default function Footer() {
     return (
         <div className="footer-container">
-            <nav className="nav-container">
-                <a href="">Home</a>
-                <a href="">ScoreBoard</a>
-                <a href="">About Us</a>
-                <a href="">Super Secret</a>
-            </nav>
-
             <h5>&copy; 2025 by Tang Huyming, Tiangkimhong Hoeu, and Kimsean. All Rights Reserved</h5>
 
             <div className="address-container">
@@ -15,10 +10,6 @@ export default function Footer() {
                 <p><strong>Address</strong>: #278H, Street 201R, Kroalkor Village, Sangkat Kilometer 6, Khan Russey Keo, Phnom Penh, Cambodia</p>
                 <p><strong>Email</strong>: <a href="mailto:triviabonanza@aupp.edu.kh">triviabonanza@aupp.edu.kh</a></p>
                 <p><strong>Telephone</strong>: <a href="tel+85515674833">(+855) 15 674 833</a></p>
-            </div>
-
-            <div className="logo-container">
-                <h2>LOGO</h2>
             </div>
         </div>
     );
