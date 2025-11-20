@@ -90,6 +90,17 @@
     gap: 10px;
 }
 
+.contact-us-container form {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffdc9c;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 1px solid #30291e;
+    padding: 10px;
+}
+
 .card-container {
     display: flex;
     flex-direction: column;
@@ -97,6 +108,23 @@
     align-items: center;
     background-color: #ffdc9c;
     padding: 10px;
+    min-width: 250px;
+    border-radius: 15px;
+    border: 1px solid #30291e;
+}
+
+.card-container img {
+    width: 100px;
+    border-radius: 10px;
+    border: 1px solid #30291e;
+}
+
+.card-title {
+    font-size: 1.25em;
+}
+
+.card-description {
+    font-size: 1.15em;
 }
 
 .nav-container a {
