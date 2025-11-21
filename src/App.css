@@ -315,3 +315,57 @@
     font-size: 1.5em;
     text-align: center;
 }
+
+/* Gamepage Styling */
+.game-container {
+    max-width: 90%;
+    height: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #dcdcdc;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* TIMER RIGHT SIDE */
+.timer-section {
+    text-align: right;
+    padding-right: 20px;
+    font-size: 1.3rem;
+    font-style: italic;
+}
+
+/* QUESTION PROMPT AREA */
+.question-section {
+    background: #ffb16e;
+    margin: 20px auto;
+    width: 85%;
+    padding: 25px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+/* CHOICES ROW */
+.choices-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+/* ANSWER INPUT SECTION */
+.answer-section {
+    margin-top: 25px;
+}
+
+.answer-input {
+    width: 60%;
+    padding: 15px;
+    background: #ffffc0;
+    font-size: 1.2rem;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+}

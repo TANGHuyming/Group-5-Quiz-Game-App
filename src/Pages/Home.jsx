@@ -61,7 +61,7 @@ export default function Home() {
         const formData = new FormData(event.target);
         const dataObject = Object.fromEntries(formData);
         console.log(dataObject);
-        navigate("/game-page", {state: {username: dataObject.username, difficulty: dataObject.difficulty || difficulty, modifier: dataObject.modifier || modifier}});
+        navigate("/game", {state: {username: dataObject.username, difficulty: dataObject.difficulty || difficulty, modifier: dataObject.modifier || modifier}});
     }
 
     return (
