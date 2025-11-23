@@ -67,12 +67,12 @@ export default function SuperSecret() {
 
   return (
     <>
-      <h1 className="title">Add Your Own Question!</h1>
+      <h1 className="title">ADD YOUR OWN QUESTION!</h1>
       <div className="home-container">
         <form onSubmit={handleSubmit} className="form-container">
           {/* Difficulty selection */}
           <div className="radio-container">
-            <h2>Choose Difficulty: </h2>
+            <h2>Choose Difficulty *: </h2>
             <div className="radio-subcontainer">
               <div>
                 <label htmlFor="easy">

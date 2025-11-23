@@ -7,6 +7,7 @@ import Leaderboard from "./Pages/Leaderboard";
 import Home from "./Pages/Home";
 import GamePage from "./Pages/GamePage";
 import SuperSecret from "./Pages/SuperSecret";
+import NotFoundPage from "./Pages/NotFoundPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/game" element={<GamePage />} />
           <Route path="/scoreboard" element={<Leaderboard />} />
           <Route path="/super-secret" element={<SuperSecret />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
       </div>

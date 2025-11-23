@@ -11,18 +11,6 @@ export function GameProvider({ children, settings }) {
     // Extract settings passed from HomePage
     const { username, difficulty, modifier, leaderboardKey } = settings;
 
-    // Custom gameQuestions (Author: TANG Huyming)
-    const [customQuestions, setCustomQuestions] = useState([]);
-    useEffect(() => {
-        const customQuestionsString = localStorage.getItem("customQuestions");
-        if(!customQuestionsString) {
-            const parsed = JSON.parse(customQuestionsString);
-            if(Array.isArray(parsed)) {
-                setCustomQuestions(prev => [...prev, ...parsed]);
-            }
-        }
-    }, []);
-
     // Game States
     const [gameQuestions, setGameQuestions] = useState([]); // Array of 10 random questions
     const [index, setIndex] = useState(0);                  // Current question index
@@ -34,6 +22,19 @@ export function GameProvider({ children, settings }) {
     const [timeLeft, setTimeLeft] = useState(10);           // Time per question
     const [startTime, setStartTime] = useState(Date.now()); // For total time spent
     const [isLoading, setIsLoading] = useState(true);
+    // Custom gameQuestions (Author: TANG Huyming)
+    const extractCustomQuestions = () => {
+        const customQuestionsString = localStorage.getItem("customQuestions");
+        console.log(customQuestionsString);
+        if(!customQuestionsString || customQuestionsString.length === 0) {
+            return [];
+        }
+        const parsed = JSON.parse(customQuestionsString);
+        if(Array.isArray(parsed)) {
+            return parsed;
+        }
+    }
+    const [customQuestions, setCustomQuestions] = useState(extractCustomQuestions);
 
     // Duration before hiding prompt (for hidden mode)
     const revealTimes = { easy: 6, medium: 4, hard: 2 };    
@@ -44,6 +45,7 @@ export function GameProvider({ children, settings }) {
     const startGame = async () => {
         setIsLoading(true);
         const combinedQuestions = [...allQuestions, ...customQuestions];
+        console.log(combinedQuestions);
         const filtered = combinedQuestions.filter(q => q.difficulty === difficulty);
         const shuffled = filtered.sort(() => Math.random() - 0.5);
         const selectedTen = shuffled.slice(0, 10);
