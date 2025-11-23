@@ -16,11 +16,60 @@ export default function SuperSecret() {
     hard: "#FF0000",
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Validate if correct answer matches any wrong answer
+    const wrongAnswers = [wrongAnswer1, wrongAnswer2, wrongAnswer3];
+    const hasMatch = wrongAnswers.some(
+      (wrong) =>
+        wrong.toLowerCase().trim() === correctAnswer.toLowerCase().trim()
+    );
+
+    if (hasMatch) {
+      window.alert("Error: Correct answer cannot match any wrong answer!");
+      return;
+    }
+
+    // Create choices array (shuffle them so correct isn't always first)
+    const choices = [correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3];
+    const shuffledChoices = choices.sort(() => Math.random() - 0.5);
+
+    // Create question object
+    const newQuestion = {
+      difficulty: difficulty,
+      prompt: question,
+      choices: shuffledChoices,
+      answers: [correctAnswer.toLowerCase().trim()],
+    };
+
+    // Get existing questions from localStorage
+    const existingQuestions =
+      JSON.parse(localStorage.getItem("customQuestions")) || [];
+
+    // Add new question and save back to localStorage
+    localStorage.setItem(
+      "customQuestions",
+      JSON.stringify([...existingQuestions, newQuestion])
+    );
+
+    // Success feedback
+    window.alert("Question added successfully!");
+
+    // Clear the form
+    setDifficulty("");
+    setQuestion("");
+    setCorrectAnswer("");
+    setWrongAnswer1("");
+    setWrongAnswer2("");
+    setWrongAnswer3("");
+  };
+
   return (
     <>
       <h1 className="title">Add Your Own Question!</h1>
       <div className="home-container">
-        <form className="form-container">
+        <form onSubmit={handleSubmit} className="form-container">
           {/* Difficulty selection */}
           <div className="radio-container">
             <h2>Choose Difficulty: </h2>
@@ -132,7 +181,7 @@ export default function SuperSecret() {
             placeholder="Enter wrong answer 2..."
             className="input-box"
             value={wrongAnswer2}
-            onChange={(e) => setWrongAnswer1(e.target.value)}
+            onChange={(e) => setWrongAnswer2(e.target.value)}
           />
 
           {/* Wrong answer 3 */}
@@ -142,7 +191,7 @@ export default function SuperSecret() {
             placeholder="Enter wrong answer 3..."
             className="input-box"
             value={wrongAnswer3}
-            onChange={(e) => setWrongAnswer1(e.target.value)}
+            onChange={(e) => setWrongAnswer3(e.target.value)}
           />
 
           {/* Submit button */}
