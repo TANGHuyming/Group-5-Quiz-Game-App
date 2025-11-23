@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 export default function Leaderboard() {
   // Old sample data
-  // ? Maybe get from this data API or codebase?
   /* const [leaderboardData] = useState([
     { rank: 1, name: "José Ramírez", score: 283 },
     { rank: 2, name: "Steven Kwan", score: 272 },
