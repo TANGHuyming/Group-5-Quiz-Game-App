@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Leaderboard from "./Pages/Leaderboard";
 import Home from "./Pages/Home";
 import GamePage from "./Pages/GamePage";
+import SuperSecret from "./Pages/SuperSecret";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/about-us" element={<About />} />
           <Route path="/game" element={<GamePage />} />
           <Route path="/scoreboard" element={<Leaderboard />} />
+          <Route path="/super-secret" element={<SuperSecret />} />
         </Routes>
         <Footer />
       </div>
