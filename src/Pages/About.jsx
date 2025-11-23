@@ -21,6 +21,7 @@ export default function About() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        window.alert("Message Sent! Thank you for playing our game!");
         setName('');
         setEmail('');
         setSubject('');
