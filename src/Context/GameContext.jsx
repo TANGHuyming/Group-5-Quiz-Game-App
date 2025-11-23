@@ -11,6 +11,18 @@ export function GameProvider({ children, settings }) {
     // Extract settings passed from HomePage
     const { username, difficulty, modifier, leaderboardKey } = settings;
 
+    // Custom gameQuestions (Author: TANG Huyming)
+    const [customQuestions, setCustomQuestions] = useState([]);
+    useEffect(() => {
+        const customQuestionsString = localStorage.getItem("customQuestions");
+        if(!customQuestionsString) {
+            const parsed = JSON.parse(customQuestionsString);
+            if(Array.isArray(parsed)) {
+                setCustomQuestions(prev => [...prev, ...parsed]);
+            }
+        }
+    }, []);
+
     // Game States
     const [gameQuestions, setGameQuestions] = useState([]); // Array of 10 random questions
     const [index, setIndex] = useState(0);                  // Current question index
@@ -31,7 +43,8 @@ export function GameProvider({ children, settings }) {
     // Pick 10 random question based on the difficulty
     const startGame = async () => {
         setIsLoading(true);
-        const filtered = allQuestions.filter(q => q.difficulty === difficulty);
+        const combinedQuestions = [...allQuestions, ...customQuestions];
+        const filtered = combinedQuestions.filter(q => q.difficulty === difficulty);
         const shuffled = filtered.sort(() => Math.random() - 0.5);
         const selectedTen = shuffled.slice(0, 10);
 

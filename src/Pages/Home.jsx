@@ -60,13 +60,13 @@ export default function Home() {
         event.preventDefault();
         const formData = new FormData(event.target);
         const dataObject = Object.fromEntries(formData);
-        console.log(dataObject);
+        // console.log(dataObject);
         navigate("/game", {state: {username: dataObject.username, difficulty: dataObject.difficulty || difficulty, modifier: dataObject.modifier || modifier}});
     }
 
     return (
         <>
-            <h1 className="title">Type Or Perish!</h1>
+            <h1 className="title">TYPE OR PERISH!</h1>
             <div className="home-container">
                 <div className="description-container">
                     <p>Type Or Perish is an exciting trivia game where you have to answer trivia questions by typing as quickly and accurately as possible. You have 5 lives, and the game gets harder as you progress. Good luck!</p>

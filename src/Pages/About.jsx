@@ -1,4 +1,4 @@
-import AboutCard from './AboutCard';
+import AboutCard from '../components/AboutCard';
 import { useState } from 'react';
 import huymingImage from '../Images/Huyming.jpg';
 import KimseanImage from '../Images/Kimsean.jpg';
@@ -35,7 +35,7 @@ export default function About() {
 
     return(
         <>
-            <h1 className="title">About Us</h1>
+            <h1 className="title">ABOUT US</h1>
             <div className="about-container" style={aboutContainerStyling}>
                 <div className="about-first-half">
                     <h2>Developers of Type or Perish!</h2>

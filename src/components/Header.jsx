@@ -22,7 +22,7 @@ export default function Header() {
                         <NavLink
                             to="/super-secret"
                             style={({isActive}) => (isActive ? {backgroundColor: "#5c4a2aff", color: "white"}: {})}
-                        >Super Secret</NavLink>
+                        >Add More Questions</NavLink>
                     </nav>
                 </div>
             </div>
