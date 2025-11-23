@@ -94,6 +94,59 @@ export default function SuperSecret() {
               </span>
             </h2>
           </div>
+
+          {/* Question input */}
+          <input
+            type="text"
+            required
+            placeholder="Enter your question..."
+            className="input-box"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+          />
+
+          {/* Correct answer */}
+          <input
+            type="text"
+            required
+            placeholder="Enter the correct answer..."
+            className="input-box"
+            value={correctAnswer}
+            onChange={(e) => setCorrectAnswer(e.target.value)}
+          />
+
+          {/* Wrong answer 1 */}
+          <input
+            type="text"
+            required
+            placeholder="Enter wrong answer 1..."
+            className="input-box"
+            value={wrongAnswer1}
+            onChange={(e) => setWrongAnswer1(e.target.value)}
+          />
+
+          {/* Wrong answer 2 */}
+          <input
+            type="text"
+            required
+            placeholder="Enter wrong answer 2..."
+            className="input-box"
+            value={wrongAnswer2}
+            onChange={(e) => setWrongAnswer1(e.target.value)}
+          />
+
+          {/* Wrong answer 3 */}
+          <input
+            type="text"
+            required
+            placeholder="Enter wrong answer 3..."
+            className="input-box"
+            value={wrongAnswer3}
+            onChange={(e) => setWrongAnswer1(e.target.value)}
+          />
+
+          {/* Submit button */}
+          <button className="submit-button">SUBMIT</button>
         </form>
       </div>
     </>
