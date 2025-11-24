@@ -17,12 +17,6 @@ export default function About() {
         width: "90%",
     };
 
-    // Layout style for the main about container (two-column layout)
-    const aboutContainerStyling = {
-        flexDirection: "row",
-        justifyContent: "space-between"
-    }
-
     // Form submit handler: prevents page reload, shows an alert, and clears the inputs
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -35,9 +29,9 @@ export default function About() {
 
     // Data for developer cards: image, display name, and short description
     const developers = [
-        {image: huymingImage, name: "Huyming", description: "Leader of Triva Bonanza"},
-        {image: KimseanImage, name: "Kimsean", description: "Member of Triva Bonanza"},
-        {image: KimhongImage, name: "TiangKimhong", description: "Member of Triva Bonanza"},
+        {image: huymingImage, name: "Huyming", description: "Member of Trivia Bonanza "},
+        {image: KimseanImage, name: "Kimsean", description: "Member of Trivia Bonanza"},
+        {image: KimhongImage, name: "TiangKimhong", description: "Member of Trivia Bonanza"},
     ]
 
     return(
@@ -45,7 +39,7 @@ export default function About() {
             <h1 className="title">ABOUT US</h1>
 
             {/* Main container: left = developer cards, right = contact form */}
-            <div className="about-container" style={aboutContainerStyling}>
+            <div className="about-container">
 
                 {/* Left column: developers list */}
                 <div className="about-first-half">

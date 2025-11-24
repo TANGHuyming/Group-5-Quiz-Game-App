@@ -28,12 +28,25 @@
 }
 
 .home-container, 
-.about-container,
 .notfound-container {
     width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    background-color: #FFCE72;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    min-height: 500px;
+    text-align: center;
+}
+
+.about-container {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     background-color: #FFCE72;
     padding: 20px;
@@ -67,12 +80,6 @@
 
 .header-subcontainer .nav-container {
     display: flex;
-    font-size: 1.25em;
-}
-
-.footer-container .nav-container {
-    display: flex;
-    flex-direction: column;
 }
 
 .about-first-half,
@@ -82,6 +89,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .about-card-container {
@@ -118,7 +126,7 @@
 .card-container img {
     width: 100px;
     border-radius: 100%;
-    border: 1px solid #30291e;
+    border: 1px solid #706d68;
 }
 
 .card-title {
@@ -130,11 +138,16 @@
 }
 
 .nav-container a {
+    display: flex;
+    font-size: 1.25em;
     padding: 20px 40px;
     cursor: pointer;
     background-color: #FFCE72;
     text-decoration: none;
     transition: background-color ease-in-out 0.25s;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-container a:hover {
@@ -152,6 +165,7 @@
     word-spacing: 10px;
     font-family: 'Arial Narrow Bold', sans-serif;
     font-weight: 900;
+    text-align: center;
 }
 
 .title {
@@ -161,6 +175,7 @@
     word-spacing: 10px;
     font-family: 'Arial Narrow Bold', sans-serif;
     font-weight: 900;
+    text-align: center;
 }
 
 .address-container {
@@ -191,6 +206,11 @@
     border-right-color: #002fff;
     border-left-width: 5px;
     border-right-width: 5px;
+}
+
+.textarea {
+    width: 100%;
+    field-sizing: content;
 }
 
 .radio-container {
@@ -369,4 +389,114 @@
     border-radius: 15px;
     border: none;
     outline: none;
+}
+
+@media (max-width: 1550px) {
+    .about-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1024px) {
+    .about-card-container {
+        gap: 5px;
+    }
+
+    .card-container {
+        min-width: 125px;
+    }
+
+    .card-container img {
+        width: 75px;
+    }
+}
+
+@media (max-width: 768px) {
+    .website-name {
+        font-size: 2.5em;
+        margin: 0;
+    }
+
+    .nav-container a {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    .footer-container {
+        gap: 50px;
+    }
+
+    .address-container {
+        padding: 2.5px 10px;
+    }
+
+    .description-container {
+        font-size: 1em;   
+    }
+
+    .title {
+        font-size: 2em;
+    }
+
+    .radio-container {
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .radio-container h2 {
+        font-size: 1.25em;
+        width: 40%;
+    }
+
+    .radio-subcontainer {
+        gap: 25px;
+        font-size: 1em;
+    }
+
+    .input-box {
+        font-size: 1em;
+    }
+
+    .submit-button {
+        width: 90%;
+        font-size: 1em;
+        padding: 5px;
+    }
+}
+
+@media (max-width: 520px) {
+    .website-name {
+        font-size: 2em;
+    }
+
+    .title {
+        font-size: 1.5em;
+    }
+
+    .nav-container a {
+        padding: 5px 10px;
+    }
+
+    .home-container,
+    .notfound-container,
+    .about-container {
+        width: 100%;
+        padding: 0;
+    }
+
+    .about-card-container {
+        flex-direction: column;
+    }
+
+    .contact-us-container form {
+        padding: 10px 0 5px 0;
+    }
+
+    .address-container h2 {
+        font-size: 1em;
+    }
+
+    .address-container p {
+        font-size: 0.75em;
+    }
 }
