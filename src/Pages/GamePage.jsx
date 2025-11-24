@@ -7,6 +7,7 @@ import ChoicesList from "../components/ChoicesList";
 import AnswerInput from "../components/AnswerInput";
 import Feedback from "../components/Feedback";
 import Timer from "../components/Timer";
+import Progress from "../components/Progress";
 
 function GameStartWrapper() {
     const { startGame, isLoading } = useGame();
@@ -26,8 +27,9 @@ function GameStartWrapper() {
 
     return (
         <>
-            <div className="timer-section"><Timer /></div>
+            <div className="progress-section"><Progress /></div>
             <div className="feedback-section"><Feedback /></div>
+            <div className="timer-section"><Timer /></div>
             <div className="question-section"><QuestionPrompt /></div>
             <div className="choices-section"><ChoicesList /></div>
             <div className="answer-section"><AnswerInput /></div>

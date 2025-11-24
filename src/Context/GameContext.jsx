@@ -167,6 +167,7 @@ export function GameProvider({ children, settings }) {
 
         // Go to leaderboard
         navigate("/scoreboard", {
+            replace: true,
             state: { username, difficulty, modifier, score, timeTaken, leaderboardKey: key }
         });
     };

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function Footer() {
     return (
         <div className="footer-container">
-            <h5>&copy; 2025 by Tang Huyming, Tiangkimhong Hoeu, and Kimsean. All Rights Reserved</h5>
+            <h5>&copy; 2025 by Tang Huyming, Tiangkimhong Hoeu, and Kimsean Bun. All Rights Reserved</h5>
 
             <div className="address-container">
                 <h2>Reach Out To Us: </h2>
