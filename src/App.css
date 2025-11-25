@@ -487,6 +487,14 @@
         font-size: 1em;
         padding: 5px;
     }
+
+    .leaderboard-header .leaderboard-cell {
+        font-size: 1.5em;
+    }
+
+    .leaderboard-body .leaderboard-cell {
+        font-size: 1.25em;
+    }
 }
 
 @media (max-width: 520px) {
@@ -505,8 +513,12 @@
     .home-container,
     .notfound-container,
     .about-container {
-        width: 100%;
+        width: 95%;
         padding: 0;
+    }
+
+    .radio-subcontainer {
+        gap: 15px;
     }
 
     .about-card-container {
@@ -523,5 +535,13 @@
 
     .address-container p {
         font-size: 0.75em;
+    }
+
+    .leaderboard-header .leaderboard-cell {
+        font-size: 1.25em;
+    }
+
+    .leaderboard-body .leaderboard-cell {
+        font-size: 1em;
     }
 }
