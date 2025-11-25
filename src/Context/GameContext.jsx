@@ -162,7 +162,7 @@ export function GameProvider({ children, settings }) {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [index, gameQuestions, isLoading]);
+    }, [index, gameQuestions, isLoading, handleResult, modifier]);
 
     // Hidden mode: After x seconds, hide the question (prompt)
     useEffect(() => {
