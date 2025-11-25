@@ -103,7 +103,8 @@ export function GameProvider({ children, settings }) {
                 endGame();
             }
         }, 1000);
-    }, [endGame, gameQuestions.length, inFeedback, index, modifier, timeLeft]);
+    // eslint-disable-next-line
+    }, [endGame, gameQuestions.length, inFeedback, index, modifier]);
 
     // Handle typing and update input state
     const handleTyping = (val) => {
@@ -138,6 +139,7 @@ export function GameProvider({ children, settings }) {
 
         // Countdown
         const interval = setInterval(() => {
+            console.log("a");
             setTimeLeft(prev => {
                 if (prev <= 1) {
                     clearInterval(interval);

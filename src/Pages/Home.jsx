@@ -23,6 +23,7 @@ export default function Home() {
         perfect: "#FF0051",
     };
 
+    // change difficultyText only when difficulty updates (Memoize for performance)
     const difficultyText = useMemo(() => {
         // Update displayed color for chosen difficulty
         switch(difficulty) {
@@ -36,7 +37,8 @@ export default function Home() {
                 break;
         }
     }, [difficulty, difficultyColors.easy, difficultyColors.medium, difficultyColors.hard]);
-
+    
+    // change modifierText only when modifier updates
     const modifierText = useMemo(() => {
         // Update displayed color for chosen modifier
         switch(modifier) {
