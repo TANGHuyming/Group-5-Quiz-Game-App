@@ -2,7 +2,6 @@
   "name": "group-5-quiz-game-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://TANGHuyming.github.io/Group-5-Quiz-Game-App",
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.17",
     "@testing-library/dom": "^10.4.1",
