@@ -136,7 +136,7 @@ export default function Home() {
                     </div>
 
                     {/* Submit button */}
-                    <button className="submit-button">Start Game!</button>
+                    <button className="submit-button">START GAME!</button>
                 </form>
             </div>
         </>

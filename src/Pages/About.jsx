@@ -13,7 +13,7 @@ export default function About() {
 
     // Inline style used for the input boxes in the contact form
     const inputBox = {
-        padding: "2px",
+        padding: "5px",
         width: "90%",
     };
 
@@ -64,8 +64,8 @@ export default function About() {
                             <input type="email" className="input-box" style={inputBox} name="email" placeholder="Your email..." value={email} required onChange={(e) => setEmail(e.target.value)}/>
                             <input type="text" className="input-box" style={inputBox} name="subject" placeholder="Subject..." value={subject} required onChange={(e) => setSubject(e.target.value)}/>
                             {/* Controlled textarea */}
-                            <textarea name="message" className="input-box" style={{resize: "none"}} placeholder="Message..." value={message} required rows="5" cols="50" onChange={(e) => setMessage(e.target.value)}></textarea>
-                            <button className="submit-button">Send Message</button>
+                            <textarea name="message" className="input-box" style={{resize: "none", width: "88%"}} placeholder="Message..." value={message} required rows="5" onChange={(e) => setMessage(e.target.value)}></textarea>
+                            <button className="submit-button">SEND MESSAGE</button>
                         </form>
                     </div>
                 </div>

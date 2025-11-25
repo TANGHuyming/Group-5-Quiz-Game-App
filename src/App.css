@@ -100,14 +100,15 @@
     gap: 10px;
 }
 
-.contact-us-container form {
+.contact-us-container {
+    width: 70%;
     display: flex;
     flex-direction: column;
     background-color: #ffdc9c;
     justify-content: center;
     align-items: center;
     border-radius: 15px;
-    border: 1px solid #30291e;
+    border: 3px solid #574a36;
     padding: 10px;
 }
 
@@ -120,7 +121,7 @@
     padding: 10px;
     min-width: 250px;
     border-radius: 15px;
-    border: 1px solid #30291e;
+    border: 3px solid #574a36;
 }
 
 .card-container img {
@@ -196,6 +197,7 @@
     padding: 10px;
     width: 50%;
     font-size: 1.25em;
+    font-family: 'Arial Narrow Bold', sans-serif;
     background-color: #D9D9D9;
     border-radius: 10px;
     border-top-style: none;
@@ -206,11 +208,6 @@
     border-right-color: #002fff;
     border-left-width: 5px;
     border-right-width: 5px;
-}
-
-.textarea {
-    width: 100%;
-    field-sizing: content;
 }
 
 .radio-container {
@@ -257,7 +254,7 @@
     font-size: 1.25em;
     font-weight: bold;
     color: #ffffff;
-    border: none;
+    border: 3px solid #6eb840;
     border-radius: 10px;
     width: 25%;
     cursor: pointer;
@@ -523,10 +520,6 @@
 
     .about-card-container {
         flex-direction: column;
-    }
-
-    .contact-us-container form {
-        padding: 10px 0 5px 0;
     }
 
     .address-container h2 {
