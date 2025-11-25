@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Home page component: collects username, difficulty and modifier then navigates to game
@@ -6,9 +6,7 @@ export default function Home() {
     // Local state for the form inputs and UI colors
     const [username, setUsername] = useState("");          // controlled text input for player's name
     const [difficulty, setDifficulty] = useState("");      // selected difficulty ("easy"/"medium"/"hard")
-    const [difficultyText, setDifficultyText] = useState("#33FF00"); // color string for difficulty display
     const [modifier, setModifier] = useState("");          // selected modifier ("nomod"/"hidden"/"sonicSpeed"/"perfect")
-    const [modifierText, setModifierText] = useState("#33FF00");    // color string for modifier display
     const navigate = useNavigate();                        // hook to programmatically change routes
 
     // Color maps for radio option circles and selected text
@@ -25,41 +23,35 @@ export default function Home() {
         perfect: "#FF0051",
     };
 
-    // Sync color text values whenever difficulty or modifier change
-    useEffect(() => {
+    const difficultyText = useMemo(() => {
         // Update displayed color for chosen difficulty
         switch(difficulty) {
             case "easy":
-                setDifficultyText(difficultyColors.easy);
-                break;
+                return difficultyColors.easy;
             case "medium":
-                setDifficultyText(difficultyColors.medium);
-                break;
+                return difficultyColors.medium;
             case "hard":
-                setDifficultyText(difficultyColors.hard);
-                break;
+                return difficultyColors.hard;
             default:
                 break;
         }
+    }, [difficulty, difficultyColors.easy, difficultyColors.medium, difficultyColors.hard]);
 
+    const modifierText = useMemo(() => {
         // Update displayed color for chosen modifier
         switch(modifier) {
             case "nomod": 
-                setModifierText(modifierColors.nomod);
-                break;
+                return modifierColors.nomod;
             case "hidden":
-                setModifierText(modifierColors.hidden);
-                break;
+                return modifierColors.hidden;
             case "sonicSpeed":
-                setModifierText(modifierColors.sonicSpeed);
-                break;
+                return modifierColors.sonicSpeed;
             case "perfect":
-                setModifierText(modifierColors.perfect);
-                break;
+                return modifierColors.perfect;
             default:
                 break;
         }
-    }, [difficulty, modifier]) // re-run when difficulty or modifier changes
+    }, [modifier, modifierColors.nomod, modifierColors.hidden, modifierColors.sonicSpeed, modifierColors.perfect]);    // color string for modifier display
 
     // Form submit handler: prevent default, read form values and navigate to /game with state
     const handleSubmit = (event) => {
@@ -68,6 +60,7 @@ export default function Home() {
         const dataObject = Object.fromEntries(formData);
         // Navigate to the game route and pass the collected settings via location state.
         // If radio values weren't picked for some reason, fallback to component state values.
+        // console.log(dataObject);
         navigate("/game", {state: {username: dataObject.username, difficulty: dataObject.difficulty || difficulty, modifier: dataObject.modifier || modifier}});
     }
 

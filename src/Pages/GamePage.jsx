@@ -10,11 +10,10 @@ import Timer from "../components/Timer";
 import Progress from "../components/Progress";
 
 function GameStartWrapper() {
-    const { startGame, isLoading } = useGame();
-
+    const {startGame, isLoading} = useGame();
     useEffect(() => {
         startGame();
-    }, []);
+    }, [startGame]);
 
     if (isLoading || !startGame) {
         return (

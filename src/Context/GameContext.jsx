@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, use } from "react";
+import { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { questions as allQuestions } from "../Data/Questions";
 import { useNavigate } from "react-router-dom";
 
@@ -25,16 +25,17 @@ export function GameProvider({ children, settings }) {
     // Custom gameQuestions (Author: TANG Huyming)
     const extractCustomQuestions = () => {
         const customQuestionsString = localStorage.getItem("customQuestions");
-        console.log(customQuestionsString);
+        // console.log(customQuestionsString);
         if(!customQuestionsString || customQuestionsString.length === 0) {
             return [];
         }
         const parsed = JSON.parse(customQuestionsString);
-        if(Array.isArray(parsed)) {
+        if(Array.isArray(parsed) && parsed !== undefined) {
             return parsed;
         }
+        return [];
     }
-    const [customQuestions, setCustomQuestions] = useState(extractCustomQuestions);
+    const [customQuestions] = useState(extractCustomQuestions);
 
     // Duration before hiding prompt (for hidden mode)
     const revealTimes = { easy: 6, medium: 4, hard: 2 };    
@@ -42,10 +43,10 @@ export function GameProvider({ children, settings }) {
 
     // Start Game: 
     // Pick 10 random question based on the difficulty
-    const startGame = async () => {
+    const startGame = useCallback(async () => {
         setIsLoading(true);
         const combinedQuestions = [...allQuestions, ...customQuestions];
-        console.log(combinedQuestions);
+        // console.log(combinedQuestions);
         const filtered = combinedQuestions.filter(q => q.difficulty === difficulty);
         const shuffled = filtered.sort(() => Math.random() - 0.5);
         const selectedTen = shuffled.slice(0, 10);
@@ -57,6 +58,74 @@ export function GameProvider({ children, settings }) {
         setScore(0);
         setInput("");
         setStartTime(Date.now());
+    }, [customQuestions, difficulty]);
+
+    // Ending the game and store result in localStorage
+    const endGame = useCallback(() => {
+        const timeTaken = ((Date.now() - startTime) / 1000).toFixed(1);
+        const key = leaderboardKey || "defaultLeaderboard";
+
+        // Get previous scores
+        const existing = JSON.parse(localStorage.getItem(key)) || [];
+        
+        // Add the new entry in 
+        const newEntry = { username, difficulty, modifier, score, timeTaken };
+        localStorage.setItem(key, JSON.stringify([...existing, newEntry]));
+
+        // Go to leaderboard
+        navigate("/scoreboard", {
+            replace: true,
+            state: { username, difficulty, modifier, score, timeTaken, leaderboardKey: key }
+        });
+    }, [difficulty, leaderboardKey, modifier, navigate, score, startTime, username]);
+
+    // Process answer result
+    const handleResult = useCallback((correct) => {
+        // Prevent double triggering
+        if (inFeedback) return;
+
+        setInFeedback(true);
+        setFeedback(correct ? "✔ Correct!" : "✘ Wrong!");
+        
+        // Update score based on remaining time
+        if (correct) {
+            const base = timeLeft;
+            const bonus = modifier === "sonicSpeed" ? base * 2: base;
+            setScore(prev => prev + bonus);
+        }
+
+        // Move to next question or Endgame
+        setTimeout(() => {
+            setInFeedback(false);
+            if (index < gameQuestions.length - 1) {
+                setIndex(prev => prev + 1);
+            } else {
+                endGame();
+            }
+        }, 1000);
+    }, [endGame, gameQuestions.length, inFeedback, index, modifier, timeLeft]);
+
+    // Handle typing and update input state
+    const handleTyping = (val) => {
+        setInput(val);
+
+        const question = gameQuestions[index];
+        if (!question) return;
+
+        // console.log('Current index:', index);
+        // console.log('Question prompt:', question.prompt);
+        // console.log('Question answers:', question.answers);
+        // console.log('User input:', val);
+
+        // In perfect mode, any wrong letter, instantly fail
+        if (modifier === "perfect" && val.length > 0) {
+            // console.log('Input:', val, 'Answers:', question.answers);
+            const allowed = question.answers.some(ans =>
+                ans.toLowerCase().startsWith(val.toLowerCase())
+            );
+            // console.log('Input:', val, 'Answers:', question.answers, 'Allowed:', allowed);
+            if (!allowed) handleResult(false);
+        }
     };
 
     // Timer logic (default 10s, and 5s for sonicSpeed mode)
@@ -80,7 +149,7 @@ export function GameProvider({ children, settings }) {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [index, gameQuestions, inFeedback]);
+    }, [index, gameQuestions, inFeedback, handleResult, modifier]);
 
     // Hidden mode: After x seconds, hide the question (prompt)
     useEffect(() => {
@@ -103,74 +172,6 @@ export function GameProvider({ children, settings }) {
         setInput("");
         setShowPrompt(true);
     }, [index]);
-
-    // Handle typing and update input state
-    const handleTyping = (val) => {
-        setInput(val);
-
-        const question = gameQuestions[index];
-        if (!question) return;
-
-        console.log('Current index:', index);
-        console.log('Question prompt:', question.prompt);
-        console.log('Question answers:', question.answers);
-        console.log('User input:', val);
-
-        // In perfect mode, any wrong letter, instantly fail
-        if (modifier === "perfect" && val.length > 0) {
-            console.log('Input:', val, 'Answers:', question.answers);
-            const allowed = question.answers.some(ans =>
-                ans.toLowerCase().startsWith(val.toLowerCase())
-            );
-            console.log('Input:', val, 'Answers:', question.answers, 'Allowed:', allowed);
-            if (!allowed) handleResult(false);
-        }
-    };
-
-    // Process answer result
-    const handleResult = (correct) => {
-        // Prevent double triggering
-        if (inFeedback) return;
-
-        setInFeedback(true);
-        setFeedback(correct ? "✔ Correct!" : "✘ Wrong!");
-        
-        // Update score based on remaining time
-        if (correct) {
-            const base = timeLeft;
-            const bonus = modifier === "sonicSpeed" ? base * 2: base;
-            setScore(prev => prev + bonus);
-        }
-
-        // Move to next question or Endgame
-        setTimeout(() => {
-            setInFeedback(false);
-            if (index < gameQuestions.length - 1) {
-                setIndex(prev => prev + 1);
-            } else {
-                endGame();
-            }
-        }, 1000);
-    };
-
-    // Ending the game and store result in localStorage
-    const endGame = () => {
-        const timeTaken = ((Date.now() - startTime) / 1000).toFixed(1);
-        const key = leaderboardKey || "defaultLeaderboard";
-
-        // Get previous scores
-        const existing = JSON.parse(localStorage.getItem(key)) || [];
-        
-        // Add the new entry in 
-        const newEntry = { username, difficulty, modifier, score, timeTaken };
-        localStorage.setItem(key, JSON.stringify([...existing, newEntry]));
-
-        // Go to leaderboard
-        navigate("/scoreboard", {
-            replace: true,
-            state: { username, difficulty, modifier, score, timeTaken, leaderboardKey: key }
-        });
-    };
 
     // Provide all game values and functions to components
     return (
