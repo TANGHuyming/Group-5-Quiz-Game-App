@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, useRef} from "react";
 import { questions as allQuestions } from "../Data/Questions";
 import { useNavigate } from "react-router-dom";
 
@@ -22,6 +22,9 @@ export function GameProvider({ children, settings }) {
     const [timeLeft, setTimeLeft] = useState(10);           // Time per question
     const [startTime, setStartTime] = useState(Date.now()); // For total time spent
     const [isLoading, setIsLoading] = useState(true);
+
+    const hasTriggeredRef = useRef(false);
+    
     // Custom gameQuestions (Author: TANG Huyming)
     const extractCustomQuestions = () => {
         const customQuestionsString = localStorage.getItem("customQuestions");
@@ -130,18 +133,26 @@ export function GameProvider({ children, settings }) {
 
     // Timer logic (default 10s, and 5s for sonicSpeed mode)
     useEffect(() => {
-        if (!gameQuestions.length) return;
+        if (!gameQuestions.length || isLoading) return;
 
-        // Time per question
         const baseTime = modifier === "sonicSpeed" ? 5 : 10;
         setTimeLeft(baseTime);
+        hasTriggeredRef.current = false;
 
-        // Countdown
         const interval = setInterval(() => {
             setTimeLeft(prev => {
                 if (prev <= 1) {
                     clearInterval(interval);
-                    if (!inFeedback && gameQuestions[index]) handleResult(false);
+                    
+                    if (!hasTriggeredRef.current) {
+                        hasTriggeredRef.current = true;
+                        setInFeedback(currentFeedback => {
+                            if (!currentFeedback) {
+                                setTimeout(() => handleResult(false), 0);
+                            }
+                            return currentFeedback;
+                        });
+                    }
                     return 0;
                 }
                 return prev - 1;
@@ -149,7 +160,7 @@ export function GameProvider({ children, settings }) {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [index, gameQuestions, inFeedback, handleResult, modifier]);
+    }, [index, gameQuestions, isLoading]);
 
     // Hidden mode: After x seconds, hide the question (prompt)
     useEffect(() => {

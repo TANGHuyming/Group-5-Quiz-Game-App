@@ -339,7 +339,7 @@
     width: 90%;
     height: 90%;
     margin: 20px auto;
-    padding: 20px;
+    padding: 80px 20px;
     background: #dcdcdc;
     border-radius: 8px;
     overflow: hidden;
@@ -359,8 +359,8 @@
     background: #ffb16e;
     margin: 20px auto;
     width: 85%;
-    padding: 25px;
-    font-size: 1.8rem;
+    padding: 15px;
+    font-size: 1.6rem;
     font-weight: bold;
     border-radius: 8px;
 }
@@ -371,6 +371,12 @@
     justify-content: center;
     gap: 20px;
     margin-top: 25px;
+}
+
+/* Feedback */
+.feedback-section {
+    font-size: 35px;
+    margin: 60px auto;
 }
 
 /* ANSWER INPUT SECTION */
