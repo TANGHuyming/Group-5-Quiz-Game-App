@@ -26,7 +26,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### **`Project Structure`**
+## Project Structure
 - **src**
   - **components**
     - AboutCard : the cards used in About page
@@ -52,9 +52,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
   - **_App.css_** : the external stylesheet of the applcation
   - **_App.js_** : where the application starts
 
-### `Additional Notes`
+## Additional Notes
 - There is a projectBrief document in this repo that you can read for the entire approaches, challenges, and React concepts used to develop this application.
 - Currently, this application is hosted on the internet using CloudFlare.
 
-### `Suggestions`
+## Suggestions
 - If you have any suggestions on the UI/UX, gameplay, bugs, or adding other pages, you can use the issues tool.
