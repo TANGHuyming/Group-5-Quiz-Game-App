@@ -1,6 +1,9 @@
 # Group-5-Quiz-Game-App
 This is the repository for the final project of our front-end development course. It is a quiz-game-app that is based on _The Tower_ boss from a game called _The Typing of the Dead_. The name of this website is _Trivia Bonanza_ while the name of the game it hosts is _Type or Perish!_
 
+## Prerequisite
+If you are going to host this application locally, don't forget to run _npm install_.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -50,3 +53,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
   - **_App.js_** : where the application starts
 
 ### `Additional Notes`
+- There is a projectBrief document in this repo that you can read for the entire approaches, challenges, and React concepts used to develop this application.
+- Currently, this application is hosted on the internet using CloudFlare.
+
+### `Suggestions`
+- If you have any suggestions on the UI/UX, gameplay, bugs, or adding other pages, you can use the issues tool.
