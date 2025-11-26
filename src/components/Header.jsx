@@ -20,7 +20,7 @@ export default function Header() {
                             style={({isActive}) => (isActive ? {backgroundColor: "#5c4a2aff", color: "white"}: {})}
                         >About Us</NavLink>
                         <NavLink
-                            to="/super-secret"
+                            to="/add-question"
                             style={({isActive}) => (isActive ? {backgroundColor: "#5c4a2aff", color: "white"}: {})}
                         >Add More Questions</NavLink>
                     </nav>

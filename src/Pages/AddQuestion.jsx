@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function SuperSecret() {
+export default function AddQuestion() {
   // States for all form fields
   const [difficulty, setDifficulty] = useState("");
   const [question, setQuestion] = useState("");
