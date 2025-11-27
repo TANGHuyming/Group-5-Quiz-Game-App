@@ -8,11 +8,31 @@ This is the repository for the final project of our front-end development course
 
 Here you can try out the live version of _Type or Perish!_ hosted on Cloudflare Pages.
 
+## Screenshots
+
+### Gameplay
+
+![Gameplay screenshot](https://raw.githubusercontent.com/TANGHuyming/Group-5-Quiz-Game-App/refs/heads/main/assets/Gameplay.png)
+
+*Typing quiz gameplay with timer and progress tracking*
+
+### Leaderboard
+
+![Leaderboard screenshot](https://raw.githubusercontent.com/TANGHuyming/Group-5-Quiz-Game-App/refs/heads/main/assets/Leaderboard.png)
+
+*Compete with other players and track your rank!*
+
+### Custom Questions
+
+![Add question screenshot](https://raw.githubusercontent.com/TANGHuyming/Group-5-Quiz-Game-App/refs/heads/main/assets/AddQuestion.png)
+
+*Add your own custom questions to expand the game!*
+
 ## Features
 
 - **Interactive Gameplay**: Answer questions by typing your responses against the clock
 - **Timer**: Race against time to answer questions before time runs out
-- **Progress Tracking**: Visually progress bar shows how you're doing in the quiz
+- **Progress Tracking**: Visual progress bar shows how you're doing in the quiz
 - **Leaderboard**: Compete with other players and see top scores
 - **Custom Questions**: Add your own custom questions to the game
 - **Responsive**: Works seamlessly across different devices
