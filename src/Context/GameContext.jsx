@@ -64,7 +64,7 @@ export function GameProvider({ children, settings }) {
     }, [customQuestions, difficulty]);
 
     // Ending the game and store result in localStorage
-    const endGame = useCallback(() => {
+    const endGame = useCallback((latestScore) => {
         const timeTaken = ((Date.now() - startTime) / 1000).toFixed(1);
         const key = leaderboardKey || "defaultLeaderboard";
 
@@ -72,15 +72,14 @@ export function GameProvider({ children, settings }) {
         const existing = JSON.parse(localStorage.getItem(key)) || [];
         
         // Add the new entry in 
-        const newEntry = { username, difficulty, modifier, score, timeTaken };
+        const newEntry = { username, difficulty, modifier, score: latestScore, timeTaken };
         localStorage.setItem(key, JSON.stringify([...existing, newEntry]));
 
         // Go to leaderboard
         navigate("/scoreboard", {
             replace: true,
-            state: { username, difficulty, modifier, score, timeTaken, leaderboardKey: key }
         });
-    }, [difficulty, leaderboardKey, modifier, navigate, score, startTime, username]);
+    }, [leaderboardKey, navigate, username, difficulty, modifier, startTime]);
 
     // Process answer result
     const handleResult = useCallback((correct) => {
@@ -103,11 +102,15 @@ export function GameProvider({ children, settings }) {
             if (index < gameQuestions.length - 1) {
                 setIndex(prev => prev + 1);
             } else {
-                endGame();
+                // Ensure that the endGame() method receives the latest score
+                setScore(latest => {
+                    endGame(latest); // send the latest score to endGame
+                    return latest; // update score with the same value
+                })
             }
         }, 1000);
     // eslint-disable-next-line
-    }, [endGame, gameQuestions.length, inFeedback, index, modifier]);
+    }, [gameQuestions.length, inFeedback, index, modifier]);
 
     // Handle typing and update input state
     const handleTyping = (val) => {
@@ -162,7 +165,7 @@ export function GameProvider({ children, settings }) {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [index, gameQuestions, isLoading, handleResult, modifier]);
+    }, [index, gameQuestions, isLoading, handleResult, modifier, score]);
 
     // Hidden mode: After x seconds, hide the question (prompt)
     useEffect(() => {
