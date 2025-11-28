@@ -72,8 +72,14 @@ export default function Home() {
             <div className="home-container">
                 <div className="description-container">
                     <p>Type Or Perish is an exciting trivia game where you have to answer trivia questions by typing as quickly and accurately as possible. You have 5 lives, and the game gets harder as you progress. Good luck!</p>
-                    <h4>Difficulty: Questions get harder the higher the difficulty. </h4>
-                    <ol>
+                    <h4>Difficulty: </h4>
+                    <ol style={{textAlign: "left"}}>
+                        <li>Easy: easy questions</li>
+                        <li>Medium: medium questions</li>
+                        <li>Hard: hard questions</li>
+                    </ol>
+                    <h4>Modifier: </h4>
+                    <ol style={{textAlign: "left"}}>
                         <li>No Mod: No modifier is used for the game</li>
                         <li>Hidden: Question will disappear after a few seconds (Difficulty changes the number of seconds to display the questions)</li>
                         <li>Sonic Speed: Timer is reduced</li>
