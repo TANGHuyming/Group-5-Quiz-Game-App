@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import DescriptionCard from "../components/DescriptionCard";
 
 // Home page component: collects username, difficulty and modifier then navigates to game
 export default function Home() {
@@ -16,12 +17,25 @@ export default function Home() {
         hard: "#FF0000",
     };
 
+    const difficultyDescList = [
+        "Easy: Easy Questions",
+        "Medium: Medium Questions",
+        "Hard: Hard Questions"
+    ];
+
     const modifierColors = {
         nomod: "#1eff00ff",
         hidden: "#DD00FF",
         sonicSpeed: "#00FFF2",
         perfect: "#FF0051",
     };
+
+    const modifierDescList =[
+        "No Mod: No modifier is used for the game",
+        "Hidden: Question will disappear after a few seconds (Difficulty changes the number of seconds to display the questions)",
+        "Sonic Speed: Timer is reduced",
+        "Perfect: You must type perfectly or type without making any mistakes (Capitalization won't trigger this mod)"
+    ];
 
     // change difficultyText only when difficulty updates (Memoize for performance)
     const difficultyText = useMemo(() => {
@@ -72,19 +86,10 @@ export default function Home() {
             <div className="home-container">
                 <div className="description-container">
                     <p>Type Or Perish is an exciting trivia game where you have to answer trivia questions by typing as quickly and accurately as possible. You have 5 lives, and the game gets harder as you progress. Good luck!</p>
-                    <h4>Difficulty: </h4>
-                    <ol style={{textAlign: "left"}}>
-                        <li>Easy: easy questions</li>
-                        <li>Medium: medium questions</li>
-                        <li>Hard: hard questions</li>
-                    </ol>
-                    <h4>Modifier: </h4>
-                    <ol style={{textAlign: "left"}}>
-                        <li>No Mod: No modifier is used for the game</li>
-                        <li>Hidden: Question will disappear after a few seconds (Difficulty changes the number of seconds to display the questions)</li>
-                        <li>Sonic Speed: Timer is reduced</li>
-                        <li>Perfect: You must type perfectly or type without making any mistakes (Capitalization won't trigger this mod)</li>
-                    </ol>
+                    <div className="description-subcontainer">
+                        <DescriptionCard title="Difficulty" list={difficultyDescList}/>
+                        <DescriptionCard title="Modifier" list={modifierDescList}/>
+                    </div>
                 </div>
 
                 {/* Form: name input + difficulty radios + modifier radios + submit */}
