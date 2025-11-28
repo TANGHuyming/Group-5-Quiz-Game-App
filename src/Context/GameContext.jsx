@@ -24,11 +24,12 @@ export function GameProvider({ children, settings }) {
     const [isLoading, setIsLoading] = useState(true);
 
     const hasTriggeredRef = useRef(false);
+    const gameEndedRef = useRef(false);
+    const timeLeftRef = useRef(10); // Use ref to track actual time for scoring
     
     // Custom gameQuestions (Author: TANG Huyming)
     const extractCustomQuestions = () => {
         const customQuestionsString = localStorage.getItem("customQuestions");
-        // console.log(customQuestionsString);
         if(!customQuestionsString || customQuestionsString.length === 0) {
             return [];
         }
@@ -48,8 +49,8 @@ export function GameProvider({ children, settings }) {
     // Pick 10 random question based on the difficulty
     const startGame = useCallback(async () => {
         setIsLoading(true);
+        gameEndedRef.current = false; // Reset game ended flag
         const combinedQuestions = [...allQuestions, ...customQuestions];
-        // console.log(combinedQuestions);
         const filtered = combinedQuestions.filter(q => q.difficulty === difficulty);
         const shuffled = filtered.sort(() => Math.random() - 0.5);
         const selectedTen = shuffled.slice(0, 10);
@@ -65,6 +66,10 @@ export function GameProvider({ children, settings }) {
 
     // Ending the game and store result in localStorage
     const endGame = useCallback((latestScore) => {
+        // Prevent duplicate saves
+        if (gameEndedRef.current) return;
+        gameEndedRef.current = true;
+
         const timeTaken = ((Date.now() - startTime) / 1000).toFixed(1);
         const key = leaderboardKey || "defaultLeaderboard";
 
@@ -84,15 +89,15 @@ export function GameProvider({ children, settings }) {
     // Process answer result
     const handleResult = useCallback((correct) => {
         // Prevent double triggering
-        if (inFeedback) return;
+        if (inFeedback || gameEndedRef.current) return;
 
         setInFeedback(true);
         setFeedback(correct ? "✔ Correct!" : "✘ Wrong!");
         
-        // Update score based on remaining time
+        // Update score based on remaining time (use ref for accurate value)
         if (correct) {
-            const base = timeLeft;
-            const bonus = modifier === "sonicSpeed" ? base * 2: base;
+            const base = timeLeftRef.current;
+            const bonus = modifier === "sonicSpeed" ? base * 2 : base;
             setScore(prev => prev + bonus);
         }
 
@@ -109,8 +114,7 @@ export function GameProvider({ children, settings }) {
                 })
             }
         }, 1000);
-    // eslint-disable-next-line
-    }, [gameQuestions.length, inFeedback, index, modifier]);
+    }, [gameQuestions.length, inFeedback, index, modifier, endGame]);
 
     // Handle typing and update input state
     const handleTyping = (val) => {
@@ -119,21 +123,19 @@ export function GameProvider({ children, settings }) {
         const question = gameQuestions[index];
         if (!question) return;
 
-        // console.log('Current index:', index);
-        // console.log('Question prompt:', question.prompt);
-        // console.log('Question answers:', question.answers);
-        // console.log('User input:', val);
-
         // In perfect mode, any wrong letter, instantly fail
         if (modifier === "perfect" && val.length > 0) {
-            // console.log('Input:', val, 'Answers:', question.answers);
             const allowed = question.answers.some(ans =>
                 ans.toLowerCase().startsWith(val.toLowerCase())
             );
-            // console.log('Input:', val, 'Answers:', question.answers, 'Allowed:', allowed);
             if (!allowed) handleResult(false);
         }
     };
+
+    // Sync timeLeft state with ref
+    useEffect(() => {
+        timeLeftRef.current = timeLeft;
+    }, [timeLeft]);
 
     // Timer logic (default 10s, and 5s for sonicSpeed mode)
     useEffect(() => {
@@ -141,15 +143,18 @@ export function GameProvider({ children, settings }) {
 
         const baseTime = modifier === "sonicSpeed" ? 5 : 10;
         setTimeLeft(baseTime);
+        timeLeftRef.current = baseTime;
         hasTriggeredRef.current = false;
 
         const interval = setInterval(() => {
-            console.log("a");
             setTimeLeft(prev => {
-                if (prev <= 1) {
+                const newTime = prev - 1;
+                timeLeftRef.current = newTime; // Keep ref in sync
+                
+                if (newTime <= 0) {
                     clearInterval(interval);
                     
-                    if (!hasTriggeredRef.current) {
+                    if (!hasTriggeredRef.current && !gameEndedRef.current) {
                         hasTriggeredRef.current = true;
                         setInFeedback(currentFeedback => {
                             if (!currentFeedback) {
@@ -160,12 +165,12 @@ export function GameProvider({ children, settings }) {
                     }
                     return 0;
                 }
-                return prev - 1;
+                return newTime;
             });
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [index, gameQuestions, isLoading, handleResult, modifier, score]);
+    }, [index, gameQuestions, isLoading, handleResult, modifier]); // Removed 'score' from dependencies
 
     // Hidden mode: After x seconds, hide the question (prompt)
     useEffect(() => {
@@ -182,7 +187,6 @@ export function GameProvider({ children, settings }) {
         }
     }, [index, modifier, revealTime]);
     
-
     // Reset input & showPrompt on new question
     useEffect(() => {
         setInput("");
